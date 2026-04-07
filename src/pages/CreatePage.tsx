@@ -63,6 +63,25 @@ export default function CreatePage() {
     [],
   );
 
+  function handleAudioPlay(e: React.SyntheticEvent<HTMLAudioElement>) {
+    const a = e.currentTarget;
+    const w = window as any;
+    if (w.__currentAudio && w.__currentAudio !== a) {
+      try {
+        w.__currentAudio.pause();
+      } catch {}
+    }
+    w.__currentAudio = a;
+  }
+
+  function handleAudioEnded(e: React.SyntheticEvent<HTMLAudioElement>) {
+    const a = e.currentTarget;
+    const w = window as any;
+    if (w.__currentAudio === a) {
+      w.__currentAudio = null;
+    }
+  }
+
   async function handleGenerate() {
     // 校验 API Key
     const apiKey = getApiKey();
@@ -502,7 +521,13 @@ export default function CreatePage() {
                             下载 MP3
                           </a>
                         </div>
-                        <audio controls className="w-full h-10" src={url}>
+                        <audio
+                          controls
+                          className="w-full h-10"
+                          src={url}
+                          onPlay={handleAudioPlay}
+                          onEnded={handleAudioEnded}
+                        >
                           <track kind="captions" />
                         </audio>
                       </div>

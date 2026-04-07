@@ -36,6 +36,25 @@ export default function HistoryPage() {
   const [loading, setLoading] = useState(true);
   const [playingUrl, setPlayingUrl] = useState<string | null>(null);
 
+  function handleAudioPlay(e: React.SyntheticEvent<HTMLAudioElement>) {
+    const a = e.currentTarget;
+    const w = window as any;
+    if (w.__currentAudio && w.__currentAudio !== a) {
+      try {
+        w.__currentAudio.pause();
+      } catch {}
+    }
+    w.__currentAudio = a;
+  }
+
+  function handleAudioEnded(e: React.SyntheticEvent<HTMLAudioElement>) {
+    const a = e.currentTarget;
+    const w = window as any;
+    if (w.__currentAudio === a) {
+      w.__currentAudio = null;
+    }
+  }
+
   const refresh = useCallback(() => {
     setTasks(loadTasks());
   }, []);
@@ -244,6 +263,8 @@ export default function HistoryPage() {
                           controls
                           className="flex-1 h-8"
                           src={url}
+                          onPlay={handleAudioPlay}
+                          onEnded={handleAudioEnded}
                         >
                           <track kind="captions" />
                         </audio>
