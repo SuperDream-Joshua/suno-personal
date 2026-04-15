@@ -170,3 +170,30 @@ export interface MVTaskRecord {
   finishTime?: number;
   errorMessage?: string;
 }
+
+// ============================================
+// 历史记录 (后端 API)
+// ============================================
+
+export interface HistoryTrack {
+  index: number;
+  fileName: string;
+  url: string;
+  size: number;
+  duration: number | null;
+}
+
+export interface HistoryItem {
+  taskId: string;
+  title: string;
+  mode: GenerationMode;
+  instrumental: boolean;
+  tags: string;
+  createdAt: string;
+  input: Record<string, unknown>;
+  tracks: HistoryTrack[];
+}
+
+export interface HistoryResponse {
+  history: HistoryItem[];
+}

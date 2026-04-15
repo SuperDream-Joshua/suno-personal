@@ -1,0 +1,25 @@
+{
+  "name": "suno-personal-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Suno Personal 后端 — 代理 Suno API + 本地任务文件持久化",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "music-metadata": "^11.12.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.15.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.9.3"
+  }
+}

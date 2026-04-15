@@ -3,6 +3,7 @@ import type {
   MVSubmitBody,
   SubmitResponse,
   TaskStatusResponse,
+  HistoryResponse,
 } from "@/types";
 
 const API_BASE = "/api";
@@ -63,6 +64,16 @@ export async function getTaskStatus(
   }
 
   return res.json() as Promise<TaskStatusResponse>;
+}
+
+// ============================================
+// 获取历史记录
+// ============================================
+
+export async function getHistory(): Promise<HistoryResponse> {
+  const res = await fetch(`${API_BASE}/v1/history`);
+  if (!res.ok) throw new Error(`获取历史记录失败 (${res.status})`);
+  return res.json();
 }
 
 // ============================================

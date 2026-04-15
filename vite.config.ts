@@ -14,9 +14,8 @@ export default defineConfig({
     port: 8024,
     proxy: {
       "/api": {
-        target: "https://api.modelverse.cn",
+        target: "http://localhost:3001",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
